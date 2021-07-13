@@ -1,0 +1,12 @@
+{
+  "items": [
+    {
+      "id": "11",
+      "status": "FROM_WAREHOUSE"
+    },
+    {
+      "id": "12",
+      "status": "FROM_WAREHOUSE"
+    }
+  ]
+}ExceptionInterceptor

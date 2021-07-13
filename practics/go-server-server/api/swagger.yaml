@@ -1,0 +1,293 @@
+---
+swagger: "2.0"
+info:
+  version: "version not set"
+  title: "api/purchase-api.proto"
+host: "localhost:2662"
+schemes:
+- "http"
+consumes:
+- "application/json"
+produces:
+- "application/json"
+paths:
+  /v1/items:
+    post:
+      tags:
+      - "PurchaseApiService"
+      operationId: "PurchaseApiService_CreateItem"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/practicsCreateItemRequest"
+        x-exportParamName: "Body"
+      responses:
+        "200":
+          description: "A successful response."
+          schema:
+            $ref: "#/definitions/practicsCreateItemResponse"
+        default:
+          description: "An unexpected error response."
+          schema:
+            $ref: "#/definitions/runtimeError"
+  /v1/purchase:
+    get:
+      tags:
+      - "PurchaseApiService"
+      operationId: "PurchaseApiService_GetPurchases"
+      parameters:
+      - name: "user_id"
+        in: "query"
+        required: false
+        type: "string"
+        format: "int64"
+        x-exportParamName: "UserId"
+        x-optionalDataType: "String"
+      - name: "item_id"
+        in: "query"
+        required: false
+        type: "string"
+        format: "int64"
+        x-exportParamName: "ItemId"
+        x-optionalDataType: "String"
+      responses:
+        "200":
+          description: "A successful response."
+          schema:
+            $ref: "#/definitions/practicsGetPurchasesResponse"
+        default:
+          description: "An unexpected error response."
+          schema:
+            $ref: "#/definitions/runtimeError"
+    post:
+      tags:
+      - "PurchaseApiService"
+      operationId: "PurchaseApiService_CreatePurchase"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/practicsCreatePurchaseRequest"
+        x-exportParamName: "Body"
+      responses:
+        "200":
+          description: "A successful response."
+          schema:
+            $ref: "#/definitions/practicsCreatePurchaseResponse"
+        default:
+          description: "An unexpected error response."
+          schema:
+            $ref: "#/definitions/runtimeError"
+  /v1/purchase/{id}:
+    delete:
+      tags:
+      - "PurchaseApiService"
+      operationId: "PurchaseApiService_DeletePurchase"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
+        format: "int64"
+        x-exportParamName: "Id"
+      responses:
+        "200":
+          description: "A successful response."
+          schema: {}
+        default:
+          description: "An unexpected error response."
+          schema:
+            $ref: "#/definitions/runtimeError"
+  /v1/users:
+    post:
+      tags:
+      - "PurchaseApiService"
+      operationId: "PurchaseApiService_CreateUser"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/practicsCreateUserRequest"
+        x-exportParamName: "Body"
+      responses:
+        "200":
+          description: "A successful response."
+          schema:
+            $ref: "#/definitions/practicsCreateUserResponse"
+        default:
+          description: "An unexpected error response."
+          schema:
+            $ref: "#/definitions/runtimeError"
+  /v1/users/{id}:
+    put:
+      tags:
+      - "PurchaseApiService"
+      operationId: "PurchaseApiService_UpdateUser"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
+        format: "int64"
+        x-exportParamName: "Id"
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/practicsUpdateUserRequest"
+        x-exportParamName: "Body"
+      responses:
+        "200":
+          description: "A successful response."
+          schema: {}
+        default:
+          description: "An unexpected error response."
+          schema:
+            $ref: "#/definitions/runtimeError"
+definitions:
+  practicsCreateItemRequest:
+    type: "object"
+    properties:
+      title:
+        type: "string"
+      description:
+        type: "string"
+      cost:
+        type: "string"
+        format: "int64"
+  practicsCreateItemResponse:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+        format: "int64"
+      title:
+        type: "string"
+      description:
+        type: "string"
+      cost:
+        type: "string"
+        format: "int64"
+    example:
+      cost: "cost"
+      description: "description"
+      id: "id"
+      title: "title"
+  practicsCreatePurchaseRequest:
+    type: "object"
+    properties:
+      user_id:
+        type: "string"
+        format: "int64"
+      item_id:
+        type: "string"
+        format: "int64"
+  practicsCreatePurchaseResponse:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+        format: "int64"
+      user_id:
+        type: "string"
+        format: "int64"
+      item_id:
+        type: "string"
+        format: "int64"
+      purchase_time:
+        type: "string"
+        format: "date-time"
+    example:
+      user_id: "user_id"
+      item_id: "item_id"
+      id: "id"
+      purchase_time: "2000-01-23T04:56:07.000+00:00"
+  practicsCreateUserRequest:
+    type: "object"
+    properties:
+      login:
+        type: "string"
+      password:
+        type: "string"
+      lastname:
+        type: "string"
+      firstname:
+        type: "string"
+  practicsCreateUserResponse:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+        format: "int64"
+      login:
+        type: "string"
+      password:
+        type: "string"
+      lastname:
+        type: "string"
+      firstname:
+        type: "string"
+    example:
+      password: "password"
+      firstname: "firstname"
+      id: "id"
+      login: "login"
+      lastname: "lastname"
+  practicsGetPurchasesResponse:
+    type: "object"
+    properties:
+      purchases:
+        type: "array"
+        items:
+          $ref: "#/definitions/practicsCreatePurchaseResponse"
+    example:
+      purchases:
+      - user_id: "user_id"
+        item_id: "item_id"
+        id: "id"
+        purchase_time: "2000-01-23T04:56:07.000+00:00"
+      - user_id: "user_id"
+        item_id: "item_id"
+        id: "id"
+        purchase_time: "2000-01-23T04:56:07.000+00:00"
+  practicsUpdateUserRequest:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+        format: "int64"
+      login:
+        type: "string"
+      password:
+        type: "string"
+      lastname:
+        type: "string"
+      firstname:
+        type: "string"
+  protobufAny:
+    type: "object"
+    properties:
+      type_url:
+        type: "string"
+      value:
+        type: "string"
+        format: "byte"
+        pattern: "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$"
+  runtimeError:
+    type: "object"
+    properties:
+      error:
+        type: "string"
+      code:
+        type: "integer"
+        format: "int32"
+      message:
+        type: "string"
+      details:
+        type: "array"
+        items:
+          $ref: "#/definitions/protobufAny"

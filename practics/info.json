@@ -1,0 +1,8 @@
+{
+  "host": "localhost",
+  "user": "vasilyevm",
+  "dbName": "practics",
+  "password": "ozon",
+  "output": "./internal/datastruct",
+  "rewrite": true
+}
